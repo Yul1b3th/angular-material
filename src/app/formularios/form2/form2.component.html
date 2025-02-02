@@ -1,0 +1,48 @@
+<div class="container" style="margin-top: 4rem">
+  <p>Formulario Reactivo</p>
+  <form [formGroup]="personaForm" (ngSubmit)="onSubmit()">
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Nombres</mat-label>
+        <input
+          matInput
+          placeholder="Introducir nombres"
+          formControlName="nombres"
+          maxlength="10"
+        />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint
+          >Máximo 10 Carácteres
+          {{ personaForm.controls["nombres"].value.length }}/10</mat-hint
+        >
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Apellidos</mat-label>
+        <input
+          matInput
+          placeholder="Introducir apellidos"
+          formControlName="apellidos"
+          maxlength="20"
+        />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint
+          >Máximo 20 Carácteres
+          {{ personaForm.controls["apellidos"].value.length }}/20</mat-hint
+        >
+      </mat-form-field>
+    </p>
+    <mat-form-field>
+      <mat-label>Correo Electrónico</mat-label>
+      <input matInput placeholder="pat@example.com" formControlName="email" />
+      @if (personaForm.controls["email"].hasError("required")) {
+      <mat-error>El dato es requerido</mat-error>
+      } @else if (personaForm.controls["email"].hasError("email")) {
+      <mat-error>El correo es inválido</mat-error>
+      }
+    </mat-form-field>
+    <br />
+    <button type="submit" mat-flat-button>Guardar</button>
+  </form>
+</div>
