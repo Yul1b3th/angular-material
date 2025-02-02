@@ -10,7 +10,7 @@
           formControlName="nombres"
           maxlength="10"
         />
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-icon matSuffix>person</mat-icon>
         <mat-hint
           >Máximo 10 Carácteres
           {{ personaForm.controls["nombres"].value.length }}/10</mat-hint
@@ -26,7 +26,7 @@
           formControlName="apellidos"
           maxlength="20"
         />
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-icon matSuffix>account_box</mat-icon>
         <mat-hint
           >Máximo 20 Carácteres
           {{ personaForm.controls["apellidos"].value.length }}/20</mat-hint
@@ -36,13 +36,42 @@
     <mat-form-field>
       <mat-label>Correo Electrónico</mat-label>
       <input matInput placeholder="pat@example.com" formControlName="email" />
+      <mat-icon matSuffix>mail</mat-icon>
       @if (personaForm.controls["email"].hasError("required")) {
       <mat-error>El dato es requerido</mat-error>
       } @else if (personaForm.controls["email"].hasError("email")) {
       <mat-error>El correo es inválido</mat-error>
       }
     </mat-form-field>
+    <p>
+      <mat-radio-group aria-label="Genero" formControlName="genero">
+        <mat-label>Genero: </mat-label>
+        <mat-radio-button value="f">Femenino</mat-radio-button>
+        <mat-radio-button value="m">Masculino</mat-radio-button>
+      </mat-radio-group>
+    </p>
+
+    <div formGroupName="habilidades">
+      <h4>Habilidades:</h4>
+      <p><mat-checkbox formControlName="liderazgo">Liderazgo</mat-checkbox></p>
+      <p>
+        <mat-checkbox formControlName="comunicacion">Comunicación</mat-checkbox>
+      </p>
+      <p><mat-checkbox formControlName="empatia">Empatia</mat-checkbox></p>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Favorite food</mat-label>
+      <mat-select formControlName="food">
+        @for (food of foods; track food) {
+        <mat-option [value]="food.value">{{ food.viewValue }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
     <br />
-    <button type="submit" mat-flat-button>Guardar</button>
+    <button type="submit" mat-flat-button [disabled]="personaForm.invalid">
+      Guardar
+    </button>
   </form>
 </div>
